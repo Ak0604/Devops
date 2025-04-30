@@ -1,0 +1,37 @@
+Create an image of php project and push on Dockerhub repository.
+
+✅ Step 1: Create a Simple PHP Project
+my-php-app/
+├── index.php
+├── Dockerfile
+
+index.php
+<?php
+echo "Hello from Dockerized PHP App!";
+?>
+
+✅ Step 2: Create a Dockerfile
+# Use official PHP image
+FROM php:8.2-apache
+
+# Copy PHP code to Apache web root
+COPY index.php /var/www/html/
+
+# Expose port 80
+EXPOSE 80
+
+✅ Step 3: Build Docker Image
+Run in terminal:
+cd my-php-app
+docker build -t your_dockerhub_username/my-php-app .
+
+✅ Step 4: Login to Docker Hub
+docker login
+
+✅ Step 5: Push to Docker Hub
+docker push your_dockerhub_username/my-php-app
+
+✅ Step 6: Run the Image (Optional)
+docker run -d -p 8080:80 your_dockerhub_username/my-php-app
+
+
