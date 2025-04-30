@@ -1,0 +1,49 @@
+Write a Selenium script to perform automated testing. 
+Sure! Here's a simple Selenium script to perform automated testing using Python. This example will:
+
+✅ Open a browser
+✅ Navigate to Google
+✅ Search for "Jenkins CI/CD"
+✅ Verify the results page contains expected text
+
+✅ Selenium Automated Test Script (Python)
+🔧 Pre-requisites:
+install selenium
+pip install selenium
+
+Test script
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+import time
+
+# Set up Chrome driver
+driver = webdriver.Chrome()  # Make sure chromedriver is in PATH
+
+try:
+    # Step 1: Open Google
+    driver.get("https://www.google.com")
+    print("Opened Google homepage.")
+
+    # Step 2: Locate search box and enter text
+    search_box = driver.find_element(By.NAME, "q")
+    search_box.send_keys("Jenkins CI/CD")
+    search_box.send_keys(Keys.RETURN)
+    print("Searched for 'Jenkins CI/CD'.")
+
+    # Step 3: Wait for results to load
+    time.sleep(2)  # better to use WebDriverWait in real tests
+
+    # Step 4: Check if results contain "Jenkins"
+    results = driver.page_source
+    if "Jenkins" in results:
+        print("Test Passed: 'Jenkins' found in search results.")
+    else:
+        print("Test Failed: 'Jenkins' not found.")
+
+finally:
+    # Step 5: Close the browser
+    driver.quit()
+    print("Browser closed.")
+
+
